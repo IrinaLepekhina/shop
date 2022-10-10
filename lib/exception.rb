@@ -1,0 +1,2 @@
+class OpenException < Exception
+end

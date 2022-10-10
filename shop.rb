@@ -9,10 +9,50 @@ end
 
 current_path = File.dirname(__FILE__)
 
-require current_path + '/lib/product'
-require current_path + '/lib/book'
-require current_path + '/lib/film'
+require current_path + '/lib/product.rb'
+require current_path + '/lib/book.rb'
+require current_path + '/lib/film.rb'
+require current_path + '/lib/exception.rb'
+require current_path + '/lib/assort_reader.rb'
+require current_path + '/lib/creator.rb'
 
-movie = Film.new(price: 990, amount: 5, name: "Леон")
+#########
+## Читает ассортимент из файла
+# Сделать, чтобы читал N количество файлов
+# Сделать, чтобы читал несколько книг из файла
 
-puts "Фильм #{movie.name} стоит #{movie.price} руб."
+assortiment = []
+
+begin
+  lines = AssortReader.new.read_from_files(current_path + '/data/books/01.txt').to_a
+  rescue OpenException
+  abort "Файл с ассортиментом не найден!"
+end
+
+assortiment << Creator.for(lines)
+
+begin
+  lines = AssortReader.new.read_from_files(current_path + '/data/films/01.txt').to_a
+  rescue OpenException
+  abort "Файл с ассортиментом не найден!"
+end
+
+assortiment << Creator.for(lines)
+
+puts "это прочитано из файлов:"
+puts assortiment
+
+#########
+## можно обнавлять информацию о фильме.книге
+
+film = Film.new(title: 'Матрица', director: 'братья Вачовски', price: 700)
+film.year = 1999
+film.update(amount: 7)
+
+#########
+## витрина
+puts
+puts "обновлённый список:"
+assortiment << film
+puts 'Вот какие товары у нас есть:'
+assortiment.each { |product| puts product }
