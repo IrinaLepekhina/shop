@@ -8,11 +8,22 @@ if Gem.win_platform?
 end
 
 current_path = File.dirname(__FILE__)
+require current_path + '/lib/product.rb'
+require current_path + '/lib/book.rb'
+require current_path + '/lib/film.rb'
 
-require current_path + '/lib/product'
-require current_path + '/lib/book'
-require current_path + '/lib/film'
+# можно обновлять и update
+film = Film.new(title: 'Матрица', director: 'братья Вачовски', price: 700)
+film.year = 1999
+film.update(amount: 7)
 
-movie = Film.new(price: 990, amount: 5, name: "Леон")
+assortiment = []
+assortiment << film
 
-puts "Фильм #{movie.name} стоит #{movie.price} руб."
+book = Book.from_file(current_path + "/data/books/01.txt")
+film = Film.from_file(current_path + "/data/films/01.txt")
+assortiment << film
+assortiment << book
+
+puts 'Вот какие товары у нас есть:'
+assortiment.each { |product| puts product }
