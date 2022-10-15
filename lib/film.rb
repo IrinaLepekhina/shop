@@ -1,7 +1,6 @@
 class Film < Product
   attr_accessor :title, :year, :director
 
-  #def self.from_file(lines)
   def self.from_file(file_path)
     lines = File.readlines(file_path, encoding: 'UTF-8').map { |l| l.chomp }
 
