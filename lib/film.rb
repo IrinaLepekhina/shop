@@ -1,16 +1,26 @@
 class Film < Product
   attr_accessor :title, :year, :director
 
-  def self.from_file(file_path)
-    lines = File.readlines(file_path, encoding: 'UTF-8').map { |l| l.chomp }
+  CSV::Converters[:blank_to_nil] = lambda do |field|
+    field && field.empty? ? nil : field
+  end
 
-    self.new(
-      title: lines[1],
-      director: lines[2],
-      year: lines[3].to_i,
-      price: lines[4].to_i,
-      amount: lines[5].to_i
-    )
+  def self.from_csv(file_path)
+    films_collect = []
+    
+    lines = CSV.read(file_path, headers: true, header_converters: :symbol, converters: [:all, :blank_to_nil]).map {|a| Hash[a]}
+
+    lines.each do |line|
+      films_collect << self.new(
+        title: line[:title],
+        director: line[:director],
+        year: line[:year].to_i,
+        price: line[:price].to_i,
+        amount: line[:amount].to_i
+      )
+    end
+
+    films_collect
   end
 
   def initialize(params)

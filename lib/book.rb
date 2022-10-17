@@ -1,28 +1,38 @@
 class Book < Product
   attr_accessor :title, :author, :genere
 
-  def self.from_file(file_path)
-    
-    lines = File.readlines(file_path, encoding: 'UTF-8').map { |l| l.chomp }
+  CSV::Converters[:blank_to_nil] = lambda do |field|
+    field && field.empty? ? nil : field
+  end
 
-    self.new(
-      title: lines[1],
-      genre: lines[2],
-      author: lines[3],
-      price: lines[4].to_i,
-      amount: lines[5].to_i
-    )
+  def self.from_csv(file_path)
+
+    books_collect = []
+    
+    lines = CSV.read(file_path, headers: true, header_converters: :symbol, converters: [:all, :blank_to_nil]).map {|a| Hash[a]}
+    lines.each do |line|
+      books_collect << self.new(
+        title: line[:title],
+        gener: line[:gener],
+        author: line[:author],
+        price: line[:price].to_i,
+        amount: line[:amount].to_i
+      )
+
+    end
+
+    books_collect
   end
   
   def initialize(params)
     super
     @title = params[:title]
     @author = params[:author]
-    @genere = params[:genere]
+    @gener = params[:gener]
   end
 
   def to_s
-    "Книга #{@title}, автор #{@author}, жанр #{@genere}, #{super}."
+    "Книга #{@title}, автор #{@author}, жанр #{@gener}, #{super}."
   end
 
   def update(params)

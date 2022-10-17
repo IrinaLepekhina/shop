@@ -15,7 +15,7 @@ class Product
     @amount = params[:amount] if params[:amount]
   end
 
-  def self.from_file(file_path)
+  def self.from_csv(file_path)
     raise NotImplementedError
   end
 
