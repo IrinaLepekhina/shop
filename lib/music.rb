@@ -1,48 +1,45 @@
-class Film < Product
-  attr_accessor :title, :year, :director
-  
+class Music < Product
+  attr_accessor :title, :artist_name, :genere
+
   CSV::Converters[:blank_to_nil] = lambda do |field|
     field && field.empty? ? nil : field
   end
-  
+
   def self.from_csv(file_path)
-    films_collect = []
+    music_collect = []
     
     lines = CSV.read(file_path, headers: true, header_converters: :symbol, converters: [:all, :blank_to_nil]).map {|a| Hash[a]}
-  
+
     lines.each do |line|
-      films_collect << self.new(
+      music_collect << self.new(
         title: line[:title],
-        director: line[:director],
-        year: line[:year].to_i,
+        artist_name: line[:artist_name],
+        genere: line[:genere],
         price: line[:price].to_i,
         amount: line[:amount].to_i
       )
     end
-  
-    films_collect
+
+    music_collect
   end
-  
+
   def initialize(params)
     super
-  
+
     @title = params[:title]
-    @year = params[:year]
-    @director = params[:director]
+    @artist_name = params[:artist_name]
+    @genere = [:genere]
   end
-  
+
   def to_s
-    "Фильм «#{@title}», #{@year}, реж. #{@director}, #{super}"
+    "Альбом «#{@title}», жанр #{@genere}, исполнитель #{@artist_name}, #{super}"
   end
-  
+
   def update(params)
     super
-  
+
     @title = params[:title] if params[:title]
-    @year = params[:year] if params[:year]
-    @director = params[:director] if params[:director]
+    @artist_name = params[:artist_name] if params[:artist_name]
+    @genere = params[:genere] if params[:genere]
   end
 end
-
-
-

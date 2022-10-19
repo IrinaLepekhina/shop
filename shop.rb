@@ -13,6 +13,7 @@ require 'csv'
 require current_path + '/lib/product.rb'
 require current_path + '/lib/book.rb'
 require current_path + '/lib/film.rb'
+require current_path + '/lib/music.rb'
 require current_path + '/lib/product_collection.rb'
 
 collection = ProductCollection.from_dir(File.dirname(__FILE__) + '/data').to_a.flatten

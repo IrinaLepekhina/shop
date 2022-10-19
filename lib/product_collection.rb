@@ -4,7 +4,8 @@ class ProductCollection
 
 PRODUCT_TYPES = {
   book: {dir: "books", class: Book},
-  film: {dir: "films", class: Film}
+  film: {dir: "films", class: Film},
+  music: {dir: "music", class: Music}
 }
 
 def initialize(products=[])
@@ -31,3 +32,4 @@ def to_a
 end
 
 end
+
