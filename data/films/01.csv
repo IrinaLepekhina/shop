@@ -1,2 +1,2 @@
-type,title,director,year,price,amount
-film,Леон,Люк Бессон,1994,990,5
+title,director,year,price,amount
+Леон,Люк Бессон,1994,990,5

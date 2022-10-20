@@ -1,6 +1,6 @@
 class ProductCollection
-  include Enumerable
-  attr_accessor :products
+include Enumerable
+attr_accessor :products
 
 PRODUCT_TYPES = {
   book: {dir: "books", class: Book},
@@ -20,7 +20,7 @@ def self.from_dir(file_path)
     product_class = hash[:class]
     
     Dir[file_path + "/" + product_dir +"/*.csv"].each do |path|
-      products << product_class.from_csv(path)
+      products << TableReader.from_csv(path, product_class)
     end
   end
 
