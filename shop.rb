@@ -10,6 +10,7 @@ end
 current_path = File.dirname(__FILE__)
 
 require 'csv'
+require 'rexml/document'
 require current_path + '/lib/product.rb'
 require current_path + '/lib/book.rb'
 require current_path + '/lib/film.rb'
