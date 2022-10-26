@@ -15,6 +15,9 @@ class Product
   def info
   end
 
+  def add_product
+  end
+
   def show
     " #{info} - #{@price} руб. (осталось #{@amount})"
   end

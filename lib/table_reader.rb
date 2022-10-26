@@ -19,8 +19,6 @@ class TableReader
       price = line[:price].to_i
       amount = line[:amount].to_i
 
-
-      # product_node.each_element("music") do |music_node|
       case product_class.to_s
       when "Book"
         product = Book.new(price, amount)
