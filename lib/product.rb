@@ -46,4 +46,24 @@ class Product
     end
   end
 
+  def self.product_types
+    [Book, Film, Music]
+  end
+
+  def save_to_xml(file_path, product)
+    unless File.exist?(file_path)
+      abort "Файл #{file_path} не найден"
+    end
+    
+    file = File.new(file_path, "r:UTF-8")
+    doc = REXML::Document.new(file)
+    file.close
+    
+    product.add_product(doc, product)
+    
+    file = File.new(file_path, "w:UTF-8")
+    doc.write(file, 2)
+    file.close
+  end
+
 end

@@ -16,6 +16,9 @@
     <film title='Пролетая над грездом кукушки' director='Милош Форман' year='1975'/>
   </product>
   <product price='350' amount='7'>
-    <book title='title' genere='genere' author='author'/>
+    <film title='title' director='director' year='year'/>
+  </product>
+  <product price='350' amount='7'>
+    <film title='title' director='director' year='year'/>
   </product>
 </products>

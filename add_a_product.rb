@@ -23,43 +23,26 @@ collection = ProductCollection.from_dir(current_path + '/data').to_a.flatten
 
 puts "Какой товар добавить?\n\n"
 
-types = []
-collection.each do |product|
-  types << product.class
-end
-
-# вставить константу типов
-types.uniq!
-types.each_with_index do |product, index|
-  puts "#{index}: #{product}"
+product_types = Product.product_types
+product_types.each_with_index do |p, i|
+  puts "#{i}: #{p.name}"
 end
 
 puts "\nДля выхода, жми \"х\""
 
-choice = 0
-# STDIN.gets.encode("UTF-8").chomp
-# ProductWriter.get_attr - STDIN.gets.encode("UTF-8").chomp
+choice = 1
+# # STDIN.gets.encode("UTF-8").chomp
+# # ProductWriter.get_attr - STDIN.gets.encode("UTF-8").chomp
 
 product = nil
 
-if choice != "x" && choice.to_i < types.size && choice.to_i >= 0
-  product_new_class = types[choice].to_s
+if choice != "x" && choice.to_i < product_types.size && choice.to_i >= 0
+  product_new_class = product_types[choice].to_s
+
   product = ProductWriter.new.get_attr(product_new_class)
   collection.push(product)
 end
 
 file_path = current_path + '/data/products.xml'
 
-unless File.exist?(file_path)
-  abort "Файл #{file_path} не найден"
-end
-
-file = File.new(file_path, "r:UTF-8")
-doc = REXML::Document.new(file)
-file.close
-
-product.add_product(doc, product)
-
-file = File.new(file_path, "w:UTF-8")
-doc.write(file, 2)
-file.close
+product.save_to_xml(file_path, product)
