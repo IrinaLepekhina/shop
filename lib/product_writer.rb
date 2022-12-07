@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
 class ProductWriter
-  def get_attr(product_new_class)
+  def get_attr(product_class)
     puts 'Стоимость в рублях:'
     price = 350
     puts 'Осталось на складе шт:'
     amount = 7
 
-    case product_new_class
+    case product_class
     when 'Book'
       puts 'Название книги:'
-      title = 'title'
+      title = STDIN.gets.encode("UTF-8").chomp
       puts 'Жанр:'
       genere = 'genere'
       puts 'Автор:'

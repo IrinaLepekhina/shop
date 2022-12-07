@@ -32,6 +32,7 @@ while choice != 'x'
 
   if choice != 'x' && choice.to_i < collection.size && choice.to_i >= 0
     product = collection[choice.to_i]
+    byebug
     total_price += product.buy
   end
 end

@@ -11,7 +11,9 @@ end
 
 current_path = File.dirname(__FILE__)
 
-require 'rexml/document'
+require "rexml/document"
+include REXML
+
 require 'csv'
 require "#{current_path}/lib/product.rb"
 require "#{current_path}/lib/book.rb"
@@ -32,9 +34,9 @@ end
 
 puts "\nДля выхода, жми \"х\""
 
-choice = 1
-# # STDIN.gets.encode("UTF-8").chomp
-# # ProductWriter.get_attr - STDIN.gets.encode("UTF-8").chomp
+choice = STDIN.gets.encode("UTF-8").chomp.to_i
+product_class = product_types[choice].name
+# ProductWriter.new.get_attr(product_class)
 
 product = nil
 

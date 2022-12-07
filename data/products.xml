@@ -24,4 +24,22 @@
   <product price='350' amount='7'>
     <film title='title' director='director' year='year'/>
   </product>
+  <product price='350' amount='7'>
+    <film title='title' director='director' year='year'/>
+  </product>
+  <product price='350' amount='7'>
+    <film title='title' director='director' year='year'/>
+  </product>
+  <product price='350' amount='7'>
+    <film title='title' director='director' year='year'/>
+  </product>
+  <product price='350' amount='7'>
+    <film title='title' director='director' year='year'/>
+  </product>
+  <product price='350' amount='7'>
+    <book title='п' genere='genere' author='author'/>
+  </product>
+  <product price='350' amount='7'>
+    <book title='Белоснежка' genere='genere' author='author'/>
+  </product>
 </products>
