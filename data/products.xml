@@ -21,4 +21,7 @@
   <product price='350' amount='7'>
     <film title='title' director='director' year='year'/>
   </product>
+  <product price='350' amount='7'>
+    <film title='title' director='director' year='year'/>
+  </product>
 </products>

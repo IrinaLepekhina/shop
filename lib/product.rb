@@ -1,22 +1,18 @@
+# frozen_string_literal: true
+
 class Product
-  
   def initialize(price, amount)
     @price = price
     @amount = amount
   end
 
-  def price
-    @price
-  end
+  attr_reader :price
 
-  def update(*params)
-  end
+  def update(*params); end
 
-  def info
-  end
+  def info; end
 
-  def add_product
-  end
+  def add_product; end
 
   def show
     " #{info} - #{@price} руб. (осталось #{@amount})"
@@ -33,15 +29,15 @@ class Product
   end
 
   def buy
-    if @amount > 0
-      puts "* * *"
+    if @amount.positive?
+      puts '* * *'
       puts "Вы купили товар #{info}"
       puts "* * *\n\n"
 
       @amount -= 1
       price
     else
-      puts "К сожалению, больше нет"
+      puts 'К сожалению, больше нет'
       0
     end
   end
@@ -51,19 +47,16 @@ class Product
   end
 
   def save_to_xml(file_path, product)
-    unless File.exist?(file_path)
-      abort "Файл #{file_path} не найден"
-    end
-    
-    file = File.new(file_path, "r:UTF-8")
+    abort "Файл #{file_path} не найден" unless File.exist?(file_path)
+
+    file = File.new(file_path, 'r:UTF-8')
     doc = REXML::Document.new(file)
     file.close
-    
+
     product.add_product(doc, product)
-    
-    file = File.new(file_path, "w:UTF-8")
+
+    file = File.new(file_path, 'w:UTF-8')
     doc.write(file, 2)
     file.close
   end
-
 end

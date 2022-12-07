@@ -1,20 +1,21 @@
-class Music < Product
+# frozen_string_literal: true
 
+class Music < Product
   def info
     "Альбом «#{@title}», жанр #{@genere}, исполнитель #{@artist_name}"
   end
 
-  def add_product(doc, product)
-    new_product = doc.root.add_element("product", "price" => "#{@price}", "amount" => "#{@amount}")
+  def add_product(doc, _product)
+    new_product = doc.root.add_element('product', 'price' => @price.to_s, 'amount' => @amount.to_s)
     new_product.add_element(
-      "music",
-      'title' => "#{@title}",
-      'artist_name' => "#{@artist_name}",
-      'genere' => "#{@genere}"
+      'music',
+      'title' => @title.to_s,
+      'artist_name' => @artist_name.to_s,
+      'genere' => @genere.to_s
     )
 
     doc
-    puts "Продукт добавлен"
+    puts 'Продукт добавлен'
   end
 
   def update(title, artist_name, genere)
